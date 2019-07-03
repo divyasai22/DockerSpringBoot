@@ -1,6 +1,6 @@
 node {
 
-    withMaven(maven:'maven') {
+    withMaven(maven:'maven_3_6_1') {
 
         stage('Checkout') {
             git url: 'https://github.com/divyasai22/DockerSpringBoot.git', CredentialsID: 'divyasai22', branch: 'master'
