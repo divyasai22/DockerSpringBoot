@@ -5,7 +5,12 @@ node('master') {
         }
         
          stage('Build') {
-            sh 'mvn clean install'
+         
+         	def mvn_version = 'maven3.6.0'
+			withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+			   sh 'mvn clean install'
+			}
+           
 
             def pom = readMavenPom file:'pom.xml'
             print pom.version
@@ -14,7 +19,7 @@ node('master') {
 
         stage('Image') {
             dir ('dockerspringboot') {
-                def app = docker.build "localhost:9090/dockerspringboot:${env.version}"
+                def app = docker.build "localhost:8085/dockerspringboot:${env.version}"
                 app.push()
             }
         }
