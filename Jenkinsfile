@@ -23,6 +23,13 @@ node('master') {
                 app.push()
             }
         }
-   
+        
+   		stage ('Run') {
+            docker.image("localhost:9090/dockerspringboot:${env.version}").run('-p 5000:5000 -h account --name account --link discovery')
+        }
+
+        stage ('Final') {
+            build job: 'docker-springboot-pipeline', wait: false
+        } 
 
 }
