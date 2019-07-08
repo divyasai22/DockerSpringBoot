@@ -16,6 +16,10 @@ node('master') {
             print pom.version
             env.version = pom.version
         }
+		stage('Initialize'){
+		        def dockerHome = tool 'myDocker'
+		        env.PATH = "${dockerHome}/bin:${env.PATH}"
+		    }
 
         stage('Image') {
             dir ('dockerspringboot') {
