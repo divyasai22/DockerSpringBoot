@@ -6,6 +6,5 @@ pipeline {
                sh "docker build -t dockerspringboot ."
                 }
             }
-        }
     }
 }
